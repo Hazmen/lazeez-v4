@@ -4,7 +4,7 @@
 
 @font-face {
     font-family: LeoHand;
-    src: url('/styles/fonts/Athelas-Regular.ttf');
+    src: url('Athelas-Regular.ttf');
 }
 
 section{
@@ -429,7 +429,7 @@ section{
 }
 
 body{
-    background-image: url('/img/wood_shutterstock_440586838.webp');
+    background-image: url('wood_shutterstock_440586838.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -831,4 +831,5 @@ html, body{
   margin: 0;
   padding: 0;
 }
+
 
