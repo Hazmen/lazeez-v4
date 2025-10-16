@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Lazeez Cafe</title>
+        <link rel="stylesheet" href="styles/css/main.css">
+        <link rel="stylesheet" href="styles/css/other-page.css">
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+            const words = document.querySelectorAll('#meet .word');
+
+            words.forEach(word => {
+                // Разбиваем каждое слово на буквы
+                word.innerHTML = word.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+            });
+
+            anime.timeline()
+                .add({
+                targets: '#meet .letter',
+                translateY: [-300, 0],
+                opacity: [0, 1],
+                easing: 'easeOutElastic(1, .8)',
+                delay: anime.stagger(120)
+                });
+            });
+        </script>
+
+        
+        <script src="js/app.js" defer></script>
+    </head>
+<body>
+    <header>
+        <a href="/other page/order.html">
+            <button class="fixed-cart">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-basket" viewBox="0 0 16 16">
+                    <path d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1v4.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 13.5V9a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h1.217L5.07 1.243a.5.5 0 0 1 .686-.172zM2 9v4.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V9H2zM1 7v1h14V7H1zm3 3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 4 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 6 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 8 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5z"/>
+                </svg>
+            </button>
+        </a>    
+
+        <div class="navbar">
+            <img src="/img/logo-white-theme.webp" alt="logo" class="logo">
+            <p class="logo-label">Lazeez Cafe</p>
+            <div class="yamenu">
+                <a href="/other page/other.html">
+                    <button class="burger-menu" id="burger-menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </a>
+            </div>
+        </div>
+
+        <div class="mobile-navbar">
+            <div class="nice-logo" style="display: flex; align-items: center; gap: 10px;">
+                <img src="/img/logo-white-theme.webp" alt="logo" class="m-logo logo">
+                <p class="logo-label-mobile">Lazeez Cafe</p>
+            </div>    
+
+            <div class="links-mob">
+                <p class="number">☎ +7 (995) 800-08-08</p>
+                <a href="#menu"><button class="mob-button">Меню</button></a>
+                <a href="/other page/about.html"><button class="mob-button">О нас</button></a>
+                <a href="/other page/order.html"><button class="mob-button">Корзина</button></a>
+                <a href="#shimi"><button class="mob-button">Контакты</button></a>
+                <a href="/other page/rates.html"><button class="mob-button">Отзывы</button></a>
+            </div>    
+        </div>
+        
+        <div class="section main">
+            <!-- <img src="img/logo.webp" width="150px" alt="Lazeez Cafe Logo" id="logo"> -->
+            <div id="vstup">
+                <p id="meet" class="selectDisable" style="letter-spacing: 15px;"> 
+                    <span class="word">Lazeez</span>
+                    <br class="br-for-mob">
+                    <span class="word">Cafe</span>
+                </p>  
+            </div>
+            <h2 class="ps">Закажите самую вкусную еду в Гудермесе быстро и легко!</h2>
+            
+            <!-- <div class="cart-place">
+            </div> -->
+        </header>
+
+        <div class="line line1"></div>
+        
+        <main class="section ultra-main centerized" id="menu">
+            <div class="menu-label">КУХНЯ И НАПИТКИ</div>
+            <div class="list-menu pizzas">
+                <div class="list-header">Пиццы<span class="arrow">▽</span></div>
+                <div class="list-body">
+                    <div class="griddy">
+                    <div class="card" data-id="food1">
+                        <img src="" alt="🍟🍕">
+                        <div class="card-content">
+                            <h3>Мясная</h3>
+                            <p>Мясная пицца, с добавлением помидоров и зелени</p>
+                            
+                            <h4 class="price">350₽ / 450₽ / 550₽</h4>
+                        
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                            
+                        </div>
+                    </div>
+
+                    <div class="card" data-id="food2">
+                        <img src="" alt="🍟🍕">
+                        <div class="card-content">
+                            <h3>Ассорти</h3>
+                            <p>Ассорти</p>
+                            <h4 class="price">350₽ / 450₽ / 550₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+
+                    <div class="card" data-id="food3">
+                        <img src="" alt="🍟🍕">
+                        <div class="card-content">
+                            <h3>Куриная</h3>
+                            <p>Куриная пицца с помидорами, сыром и зеленью.</p>
+                            <h4 class="price">350₽ / 450₽ / 550₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+
+                    <div class="card" data-id="food4">
+                        <img src="" alt="🍟🍕">
+                        <div class="card-content">
+                            <h3>Куриная с грибами</h3>
+                            <p>Куриная пицца с грибами.</p>
+                            <h4 class="price">350₽ / 450₽ / 550₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food5">
+                        <img src="" alt="🍟🍕">
+                        <div class="card-content">
+                            <h3>Цезарь с курицей</h3>
+                            <p>Пицца цезарь с салатом, майонезом и курицей.</p>
+                            <h4 class="price">350₽ / 450₽ / 550₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food6">
+                        <img src="" alt="🍟🍕">
+                        <div class="card-content">
+                            <h3>Жульетта</h3>
+                            <p>Если бы я знал что это</p>
+                            <h4 class="price">350₽ / 450₽ / 550₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food7">
+                        <img src="" alt="🍟🍕">
+                        <div class="card-content">
+                            <h3>Сырная</h3>
+                            <p>Сырная пицца с сыром, с добавлением сыра и посыпанной сыром</p>
+                            <h4 class="price">350₽ / 450₽ / 550₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food8">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Чили (острая)</h3>
+                            <p>Ваш язык сгорит (а может и нет)</p>
+                            <h4 class="price">350₽ / 450₽ / 550₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food9">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Колбасная</h3>
+                            <p>Пицца с кусочками колбасы.</p>
+                            <h4 class="price">350₽ / 450₽ / 550₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food10">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Пиде с курицей</h3>
+                            <p>Куриная пицца с помидорами, сыром и зеленью, пиде.</p>
+                            <h4 class="price">350₽ / 450₽ / 550₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food11">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Пиде с мясом</h3>
+                            <p>Мясная пицца с помидорами, сыром и зеленью, пиде.</p>
+                            <h4 class="price">350₽ / 450₽ / 550₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food12">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>APC пицца</h3>
+                            <p>Что то на кулинарном</p>
+                            <h4 class="price">350₽ / 450₽ / 550₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="list-menu first-foods">
+            <div class="list-header">Первые блюда <span class="arrow">▽</span></div>
+            <div class="list-body">
+                <div class="griddy">
+                    <div class="card" data-id="food13">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Чечевичный суп</h3>
+                            <p>Чечевичный суп — суп с чечевицей в качестве основного ингредиента. Полезный, вкусный и питательный обед.</p>
+                            <h4 class="price">250₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food14">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Нохчи суп</h3>
+                            <p>Нохчи суп. Картошка, мясо, зелень и бомбезный бульон.</p>
+                            <h4 class="price">380₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+
+                    <div class="card" data-id="food15">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Лагман</h3>
+                            <p>🍜🍜🍜</p>
+                            <h4 class="price">350₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="list-menu second-foods">
+            <div class="list-header">Вторые блюда <span class="arrow">▽</span></div>
+            <div class="list-body">
+                <div class="griddy">
+                    <div class="card" data-id="food16">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Гуляш</h3>
+                            <p>Я забыл что это</p>
+                            <h4 class="price">350₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food17">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Жульен</h3>
+                            <p>Брат Жульетты</p>
+                            <h4 class="price">400₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food18">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Жаркое</h3>
+                            <p>Горячо</p>
+                            <h4 class="price">400₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food19">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Бурито</h3>
+                            <p>Наша недавняя новинка, хит продаж</p>
+                            <h4 class="price">400₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food20">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Куриный стейк</h3>
+                            <p>Вкуснейший куриный стейк с рисом и салатом.</p>
+                            <h4 class="price">450₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food21">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Мясной стейк</h3>
+                            <p>Вкуснейший мясной стейк с рисом и салатом.</p>
+                            <h4 class="price">650₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food22">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Рыба хек (шайбы)</h3>
+                            <p>Я не знаю чо эт</p>
+                            <h4 class="price">370₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food23">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Мясо по-тайски</h3>
+                            <p>👲👲👲👲</p>
+                            <h4 class="price">350₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food24">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Печень с гарниром</h3>
+                            <p>Гарнир в комплекте</p>
+                            <h4 class="price">350₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food25">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Ахьар топ</h3>
+                            <p>Просто топ💪💪</p>
+                            <h4 class="price">350₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="list-menu garniri">
+            <div class="list-header">Гарниры <span class="arrow">▽</span></div>
+            <div class="list-body">
+                <div class="griddy">
+                    <div class="card" data-id="food26">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Картошка Фри / деревенская</h3>
+                            <p>Картошка фри или Деревенская. Хорошие закуски</p>
+                            <h4 class="price">250₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food27">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Наггетсы (10шт.)</h3>
+                            <p>Наггеты что восхитят вас своим вкусом. В одной порции 10шт.</p>
+                            <h4 class="price">200₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food28">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Крылышки острые 4шт. + соус</h3>
+                            <p>Просто топ💪💪</p>
+                            <h4 class="price">300₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food29">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Рис</h3>
+                            <p>Вкусный рис</p>
+                            <h4 class="price">120₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food30">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Соус чесночный</h3>
+                            <p>Вкусный чесночный соус</p>
+                            <h4 class="price">50/80₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food31">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Соус сырный / томатный</h3>
+                            <p>Соусы сырные и томатные</p>
+                            <h4 class="price">50₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="list-menu salads">
+            <div class="list-header">Салаты <span class="arrow">▽</span></div>
+            <div class="list-body">
+                <div class="griddy">
+                    
+                    <div class="card" data-id="food32">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Свежий</h3>
+                            <p>Салат свежий</p>
+                            <h4 class="price">250₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food33">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Цезарь</h3>
+                            <p>Салат цезарь (не путать с пиццей)</p>
+                            <h4 class="price">250₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food34">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Греческий</h3>
+                            <p>Ждем римский</p>
+                            <h4 class="price">250₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="list-menu juices">
+            <div class="list-header">Холодные напитки <span class="arrow">▽</span></div>
+            <div class="list-body">
+                <div class="griddy">
+                    
+                    <div class="card" data-id="food35">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Мохито классический</h3>
+                            <p>Популярный среди клиентов</p>
+                            <h4 class="price">250/350₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food36">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Мохито клубничный</h3>
+                            <p>Очень вкусный и освежающий</p>
+                            <h4 class="price">250/350₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food37">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Мохито ягодный</h3>
+                            <p>Супер ягодный и синий</p>
+                            <h4 class="price">250/350₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="list-menu milkshakes">
+            <div class="list-header">Молочный коктейли <span class="arrow">▽</span></div>
+            <div class="list-body">
+                <div class="griddy">
+                    
+                    <div class="card" data-id="food38">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Банановый коктейль</h3>
+                            <p>Бананчики..</p>
+                            <h4 class="price">300₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food39">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Ванильный коктейль</h3>
+                            <p>Молочный ванильный коктейль, сладкий.</p>
+                            <h4 class="price">300₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food40">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Клубничный коктейль</h3>
+                            <p>Освежающий клубничный коктейль</p>
+                            <h4 class="price">300₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food41">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Шоколадный коктейль</h3>
+                            <p>Самый вкусный</p>
+                            <h4 class="price">300₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>  
+
+        
+        <div class="list-menu tea">
+            <div class="list-header ">Чаи <span class="arrow">▽</span></div>
+            <div class="list-body">
+                <div class="griddy">
+                    
+                    <div class="card" data-id="food42">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Улыбка Гейши</h3>
+                            <p>Улыбается значит вкусная</p>
+                            <h4 class="price">300₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food43">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Дикая Вишня</h3>
+                            <p>Вишневый (?) чай</p>
+                            <h4 class="price">300₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food44">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Таежный сбор</h3>
+                            <p>Скидываемся по</p>
+                            <h4 class="price">300₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food45">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Брызги шампанского</h3>
+                            <p></p>
+                            <h4 class="price">300₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food46">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Нахальный Фрукт</h3>
+                            <p></p>
+                            <h4 class="price">300₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food47">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Зеленый чай с жасмином</h3>
+                            <p></p>
+                            <h4 class="price">300₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food48">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Чай Эпл Грей (бергамот)</h3>
+                            <p></p>
+                            <h4 class="price">300₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food49">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Чай Лев</h3>
+                            <p></p>
+                            <h4 class="price">300₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food50">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Черный чай</h3>
+                            <p></p>
+                            <h4 class="price">300₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food51">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Черный с Чарбецом</h3>
+                            <p></p>
+                            <h4 class="price">300₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food52">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Черный Персик-айва</h3>
+                            <p></p>
+                            <h4 class="price">300₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="list-menu napitki">
+            <div class="list-header">Напитки <span class="arrow">▽</span></div>
+            <div class="list-body">
+                <div class="griddy">
+                    
+                    <div class="card" data-id="food53">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Black Tea персиковый / ягодный / зеленый</h3>
+                            <p></p>
+                            <h4 class="price">70₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food54">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Мохито</h3>
+                            <p></p>
+                            <h4 class="price">60₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food55">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Coca-cola \ pepsi</h3>
+                            <p></p>
+                            <h4 class="price">80₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card" data-id="food56">
+                        <img src="" alt="food">
+                        <div class="card-content">
+                            <h3>Кинза кола</h3>
+                            <p></p>
+                            <h4 class="price">70₽</h4>
+                
+                            <button class="add-to-cart" id="add-button">Добавить</button>
+                            <button class="remove-from-cart" id="remove-button">Убрать</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="line line1"></div>
+
+    <footer>
+        <div class="yl" style="font-weight: 600; color: white; margin-top: 10vh; text-align: center;">
+            <h1>Дополнительно</h1>
+        </div>    
+
+        <div class="contacts" id="shimi">
+            <div class="main-contacts">
+                <p class="cont">Контакты</p>
+
+                <p class="email">Электронная почта:</p>
+                <p class="email1" style="margin-bottom: 25px;">cafe-lazeez@mail.ru</p>
+
+                <p class="email">☎ Телефон:</p>
+                <p class="email1">+7 (995) 800-08-08</p>
+
+                <div class="line"></div>
+
+                
+                <div class="socials">
+                    <p class="cont">Соцсети</p>
+                    
+                    
+                    <div class="insta-1">
+                        <img src="/img/insta.webp" alt="insta" class="insta" style="width: 50px; height: 50px; border-radius: 50%;">
+                        <p>@Lazeez-Cafe</p>
+                    </div>
+                    
+                    
+                    <div class="whatsapp-1">
+                        <img src="/img/5a4e2ef62da5ad73df7efe6e.png" alt="whatsapp" class="whatsapp" style="width: 45px; height: 45px; border-radius: 0%; filter:brightness(100)">
+                        <p>+7 (995) 800-08-08</p>
+                    </div>    
+                </div>
+
+                <div class="line line-none" style="margin-top: 50px;"></div>
+                
+            </div>
+            <div class="map">
+                <h2>Где мы:</h2>
+                <p>Чеченская Республика, Гудермес, улица Ватутина, 51</p>
+                <div style="position:relative; overflow:hidden; border-radius: 30px;" class="map-ya"><a href="https://yandex.ru/maps/11026/gudermes/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;">Гудермес</a><a href="https://yandex.ru/maps/11026/gudermes/?ll=46.092288%2C43.347822&mode=routes&rtext=~43.347822%2C46.092288&rtt=auto&ruri=~&utm_medium=mapframe&utm_source=maps&z=17" style="color:#eee;font-size:12px;position:absolute;top:14px;"></a><iframe src="https://yandex.ru/map-widget/v1/?ll=46.092288%2C43.347822&mode=routes&rtext=~43.347822%2C46.092288&rtt=auto&ruri=~&z=17" width="100%" height="500px" frameborder="1" allowfullscreen="true" style="position:relative;"></iframe></div>
+            </div>
+        </div>
+    </footer>
+
+    
+</body>
+</html>
+

@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cart</title>
+
+    <script src="https://api-maps.yandex.ru/v3/?apikey=615bc72c-8453-47f1-bdc1-9c432ee92cce&lang=ru_RU"></script>
+    
+    <style>
+        :root{
+            --index: calc(1vw + 1vh);
+            --height: 100%;
+            --width: calc(1% * var(--index));
+        }
+
+        @font-face {
+            font-family: a;
+            src: url('/styles/fonts/Athelas-Regular.ttf');
+        }
+        body{
+            background-image: url('/img/wood_shutterstock_440586838.webp');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            overflow-x: hidden;
+            touch-action: manipulation;
+        }
+
+        .order-container{
+            text-align: left;
+            background-color: rgba(87, 87, 87, 0.114);
+            color: rgb(255, 255, 255);
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 12px 10px 8px rgba(15, 15, 15, 0.905);
+            backdrop-filter: blur(10px);
+            font-family: Arial;
+            width: 80%;
+            height: auto;
+            padding-bottom: 3em;
+        }
+
+        .logo{
+            width: calc(var(--index) * 7);
+            height: auto;
+            display: block;
+            border-radius: 30%;
+            margin: 0 auto 20px auto;
+            box-shadow: 12px 10px 10px #171717;
+        }
+
+        input{
+            border-radius: 20px;
+            padding: 10px;
+        }
+
+        .ordering {
+            background: rgb(106, 255, 0);
+            border: 2px solid rgb(16, 137, 0);
+        }
+        
+        
+        fieldset{
+            border-radius: 10px;
+            border: white dashed;
+            font-size: calc(var(--index)*2)
+        }
+
+
+        #order-way{
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            color: white;
+            background-color: #1F1F1F;
+            font-family: Arial;
+            font-size: calc(var(--index)*2);
+            width: calc(var(--index)*20);
+            height: calc(var(--index)*5);
+            border-radius: 10px;
+            padding-left: 10px;
+        }
+
+        #order-way { 
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e"); 
+            background-repeat: no-repeat; 
+            background-position: right 10px center; 
+            background-size: 12px; 
+            padding-right: 30px; 
+        }
+
+        .line{
+            height: 2px;
+            background: linear-gradient(to right, transparent, #ffffff 20%, #ffffff 80%, transparent);
+            margin: 10px;
+        }
+
+        .order-way{
+            transition: 0.9s;
+        }
+
+        .order-way:focus {
+            outline: none;
+            border-color: transparent;
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
+            transition: 0.2;
+        }
+
+        .back-button {
+            display: flex;
+            border: 2px solid rgb(255, 255, 255);
+            background-color: transparent;
+            width: calc(var(--index)*4);
+            height: calc(var(--index)*4);
+            border-radius: 50%;
+            color: white;
+            font-size: calc(var(--index)*3.5);
+            text-align: center; 
+            padding: 5px;
+            align-items: center;
+            justify-content: center;
+            line-height: calc(var(--index)*4);
+        }
+
+        .header-content{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            width: 100%;
+            margin-bottom: 20px;
+            text-shadow: 12px 10px 10px #000000;
+        }
+
+        .header-content .back-button {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-55%);
+        }
+
+        a{text-decoration: none;}
+
+        .price-and-etc{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+
+        @media (max-width: 600px) {
+            .ordering-mob{
+                display: block;
+                background: rgb(106, 255, 0);
+                border: 2px solid rgb(16, 137, 0);
+                border-radius: 30px;
+                font-family: Arial, sans-serif;
+                font-weight: bold;
+                color: #ffffff;
+                font-size: calc(var(--index) * 1.8);
+                padding: 10px 24px;
+                cursor: pointer;
+                justify-self: center;
+                margin-top: 20px;
+            }
+
+            .ordering-bs{
+                display: none;
+            }
+        }
+
+        @media (min-width: 601px) {
+            .ordering-mob{
+                display: none;
+            }
+
+            .modal-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.6);
+                z-index: 1000;
+                justify-content: center;
+                align-items: center;
+                font-family: a;
+            }
+
+            .modal-content {
+                background-color: #2f2f2f;
+                color: #fff;
+                border-radius: 40px;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+                width: 100%;
+                padding: clamp(25px, 5vw, 50px) clamp(20px, 4vw, 40px);
+                display: flex;
+                flex-direction: column;
+                transform: translateY(30px);
+                animation: modalSlideUp 0.4s ease forwards;
+            }
+
+            .ordering-bs{
+                display: block;
+                background: rgb(106, 255, 0);
+                border: 2px solid rgb(16, 137, 0);
+                border-radius: 30px;
+                font-family: Arial, sans-serif;
+                font-weight: bold;
+                color: #ffffff;
+                font-size: calc(var(--index) * 1.8);
+                padding: 10px 24px;
+                cursor: pointer;
+                justify-self: center;
+                margin-top: 20px;
+            }
+
+            .modal-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 10px;
+            }
+
+            .modal-header h2 {
+                margin: 0 auto;
+                font-size: clamp(1.5rem, 2.2vw, 2.2rem);
+                font-weight: bold;
+                text-align: center;
+            }
+
+            .close-modal {
+                border: none;
+                background: transparent;
+                cursor: pointer;
+                width: 50px;
+                height: 50px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 0;
+                transition: 0.2s;
+            }
+
+            .close-modal svg {
+                width: 30px;
+                height: 30px;
+                stroke: white;
+                stroke-width: 2.5;
+            }
+        }
+
+        
+
+        .price-and-etc h2,
+        .price-and-etc h3 {
+            margin: 0;
+            text-align: center;
+            align-items: center;
+        }
+
+        .price-and-etc h2{
+            font-size: calc(var(--index) * 2);
+        }
+
+        .price-and-etc h3{
+            font-size: calc(var(--index) * 1.5);
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+
+        .cart-item{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            min-width: 224px;
+            max-width: 340px;
+            border-radius: 30px;
+            background-color: white;
+            color: black;
+            box-sizing: border-box;
+            scroll-snap-align: start;
+        }
+
+        .chosen-foods{
+            display: flex;
+            gap: 20px;
+            padding: 10px;
+            width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-snap-type: x proximity;
+            box-sizing: border-box;
+            scrollbar-width: none;
+        }
+
+        .remove-from-cart{
+            border: none;
+            background-color: rgba(255, 20, 20, 0.978);
+            color: rgb(255, 255, 255);
+            border-radius: 30px 30px 0px 0px;
+            cursor: pointer;
+            width: 100%;
+            height: 30px;
+            min-width: 60px;
+            font-weight: 200;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+            margin-top: 0;
+        }
+
+        .cart-item-info{
+            font-weight: 600;
+            font-size: clamp(16px, 2.5vw, 20px);
+            margin: 10px;
+            width: 100%;
+            padding-left: 30px;
+            text-align: left;
+        }
+
+
+        .add-or-decrease{
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 0px;
+            align-items: center;
+            justify-content: center;
+            width: 90%;
+            font-weight: 600;
+        }
+
+        .add-one, .decrease-one{
+            border-radius: 30px;
+            color: white;
+            width: 100%;
+            height: 25px;
+            margin: 10px;
+            font-size: larger;
+        }
+
+        .add-one{
+            background-color: rgb(0, 220, 0);
+            border: 2px solid rgb(23, 172, 0);
+            width: 100%;
+        }
+
+        .decrease-one{
+            background-color: red;
+            border: 2px solid rgb(160, 2, 2);
+        }
+
+        #total-price{
+            font-weight: 100;
+            font-family: a;
+            font-size: 3em;
+        }
+
+        .bluda{
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            align-items: center;
+            width: 100%;
+            height: 60px;
+            text-align: left;
+            border-radius: 30px;
+            background-color: whitesmoke;
+            box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.668);
+            color: black;
+            max-width: 500px;
+            margin: 0 auto;
+            margin-bottom: 10px;
+            font-size: clamp(30px, 2.5vw, 30px);
+        }
+
+        .bluda h3{
+            margin-left: 5px;
+        }
+
+        .remove-from-cart-all{
+            border: none;
+            background-color: rgb(255, 20, 20);
+            color: rgb(255, 255, 255);
+            border-radius: 50%;
+            cursor: pointer;
+            width: var(--width);
+            height: var(--height);
+            aspect-ratio: 3/3;
+            font-weight: 200;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .gif-nothing{
+            width: clamp(200px, 25vw, 350px);
+            height: auto;
+            border-radius: 1px;
+            margin: 0 auto;
+            margin-top: 20px;
+        }
+
+        .nothing{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .mob-modal{
+            width: 90%;
+        }
+
+        #modal-mob, #modal-bs{
+            display: none;
+            position: fixed;
+        }
+
+        .order-way-btn {
+        flex: 1;
+        background: rgba(255, 255, 255, 0.7);
+        border: none;
+        padding: 15px 20px;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #1a1a1a;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-family: Arial;
+        }
+
+        .order-way-btn:first-child {
+        border-top-left-radius: 25px;
+        border-bottom-left-radius: 25px;
+        }
+
+        .order-way-btn:last-child {
+        border-top-right-radius: 25px;
+        border-bottom-right-radius: 25px;
+        }
+
+        .order-way-btn.active {
+        background: #fff;
+        transform: scale(1.05);
+        z-index: 2;
+        border-radius: 25px;
+        }
+
+        .input-info {
+        border: 0.8px solid grey;
+        border-radius: 10px;
+        background: #f5f5f5;
+        padding: 0.75rem;
+        font-family: Arial;
+        font-size: 1rem;
+        font-weight: 500;
+        box-sizing: border-box;
+        width: 100%;
+        }
+
+        .sending {
+        background: rgb(126, 126, 126);
+        border: 2px solid rgb(220, 220, 220);  
+        border-radius: 30px;
+        font-family: Arial, sans-serif;
+        font-weight: bold;
+        color: #ffffff;
+        font-size: calc(var(--index) * 1.8);
+        padding: 10px 24px;
+        cursor: pointer;
+        }
+
+        .order-toggle {
+        position: relative;
+        display: flex;
+        width: clamp(260px, 60%, 360px);
+        height: 48px;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.12);
+        padding: 4px;
+        box-sizing: border-box;
+        border: 1px solid rgba(255,255,255,0.18);
+        overflow: hidden;
+        font-family: Arial, sans-serif;
+        user-select: none;
+        }
+
+        .order-toggle input[type="radio"] {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        border: 0;
+        }
+
+        .order-toggle label {
+        flex: 1;
+        z-index: 2;
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+        color: #e6e6e6;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: color 0.18s linear;
+        padding: 0 8px;
+        }
+
+        .order-toggle__indicator {
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        width: calc(50% - 8px);
+        height: calc(100% - 8px);
+        min-width: 50px;
+        width: calc(50% - 5px);
+        background: #ffffff;
+        border-radius: 999px;
+        z-index: 1;
+        transition: transform 0.22s ease;
+        transform: translateX(0);
+        box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+        }
+
+        #pickup:checked ~ .order-toggle__indicator {
+        transform: translateX(100%);
+        }
+
+        .order-toggle input[type="radio"]:checked + label {
+        color: #111111;
+        }
+
+        #modal-bs {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.6);
+        z-index: 1000;
+        justify-content: center;
+        padding-top: 2vh;
+        }
+
+        #modal-bs .modal-content {
+        display: flex;
+        flex-direction: row;
+        width: 80vw;
+        max-width: 1100px;
+        height: auto;
+        border-radius: 40px;
+        overflow: hidden;
+        background: #2f2f2f;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        animation: modalSlideUp 0.4s ease forwards;
+        }
+
+        @keyframes modalSlideUp {
+        from { transform: translateY(40px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+        }
+
+        .order-toggle-mob{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 30px;
+            font-family: Arial;
+            color: white;
+        }
+
+        .modal-overlay-bs-second{
+            display: none;
+        }
+
+        .modal-field-content-selftake{
+            display: none;
+        }
+
+        .modal-field-content-delievery{
+            display: none;
+        }
+    </style>
+
+    <link rel="stylesheet" href="/styles/css/modal-okno.css">
+    <link rel="stylesheet" href="/styles/css/ss-modal.css">
+</head>
+<body>
+    <div class="modal-overlay" id="modal-mob">
+        <div class="mob-modal">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h2>Оформление</h2>
+                <button class="close-modal" onclick="closeModalMob()">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M6 6l12 12M6 18L18 6" />
+                </svg>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <label class="option">
+                <span>Доставка</span>
+                <input type="radio" name="mob-delivery" value="delivery" checked>
+                </label>
+
+                <label class="option">
+                <span>Самовывоз</span>
+                <input type="radio" name="mob-delivery" value="pickup">
+                </label>
+            </div>
+
+            <button class="choose-this" onclick="chooseDeliveryOption()">Выбрать</button>
+            </div>
+        </div>
+    </div>
+
+<div class="modal-overlay" id="modal-bs">
+  <div class="bs-modal">
+    <div class="modal-content" style="
+        display: flex; 
+        flex-direction: row; 
+        padding: 0; 
+        overflow: hidden;     /* чтобы не схлопывалась */
+        width: 80vw;            /* фиксированная ширина окна */
+        max-width: 1100px;
+        ">
+
+      <div class="modal-left" style="
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        background-color: #2f2f2f;
+        border-top-left-radius: 40px;
+        border-bottom-left-radius: 40px;
+        padding: 40px;
+        box-sizing: border-box;
+      ">
+        <div class="modal-header" style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+          <button class="close-modal" onclick="closeModalBs()" style="width: 45px; height: 45px; background: transparent; border: none; cursor: pointer;">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M6 6l12 12M6 18L18 6" />
+            </svg>
+          </button>
+          <h2 style="margin: 0 auto; font-size: clamp(1.5rem, 2.2vw, 2.2rem); font-weight: bold; text-align: center;">
+            Оформление
+          </h2>
+        </div>
+
+        <div class="modal-order-way-container" style="
+          display: flex;
+          justify-content: center;
+          gap: 0;
+          margin-bottom: 30px;
+          align-items: center;
+        ">
+        <div class="order-toggle">
+            <input type="radio" id="delivery" name="order-way" value="delivery" checked>
+            <label for="delivery">Доставка</label>
+
+            <input type="radio" id="pickup" name="order-way" value="pickup">
+            <label for="pickup">Самовывоз</label>
+
+            <div class="order-toggle__indicator"></div>
+        </div>
+        </div>
+
+        <div class="modal-order-way-delievery-form" style="display: flex; flex-direction: column; gap: 20px;">
+          <input type="text" placeholder="Город, улица, дом *" class="input-info big-one main-address" name="place">
+
+        
+          <input type="text" id="podyezd" placeholder="Подъезд" class="input-info input-small">
+
+          <input type="text" id="name-and-surname" class="input-info big-one name-surname-info" placeholder="Ф.И.О. *">
+          <input type="number" id="clients-phone" class="input-info big-one phone-num" placeholder="Номер телефона">
+          <input type="text" id="address-comment" class="input-info big-one comment-address" placeholder="Комментарий к адресу">
+
+          <div class="im-ready-btn" style="display: flex; justify-content: center; margin-top: 20px;">
+            <a href="final-send"><button class="sending">Отправка</button></a>
+          </div>
+        </div>
+
+        <div class="modal-order-way-selftake-form" style="display: none; flex-direction: column; gap: 20px;">
+          <input type="text" id="name-and-surname2" class="input-info big-one name-surname-info" placeholder="Ф.И.О. *">
+          <input type="number" id="clients-phone2" class="input-info big-one phone-num" placeholder="Номер телефона">
+
+          <div class="our-address" style="font-family: Arial; text-align: center; margin-top: 10px;">
+            <strong style="color: white; font-weight: 500; font-size: clamp(14px, 0.9vw, 16px);">Гудермес, ул. Ватутина 51</strong>
+            <p style="color: rgb(201, 201, 201); font-weight: 500; font-size: clamp(12px, 0.7vw, 14px); margin: 5px 0;">
+              Пн-Вс: 9:00-23:00
+            </p>
+          </div>
+
+          <div class="im-ready-btn" style="display: flex; justify-content: center; margin-top: 20px;">
+            <a href="final-send"><button class="sending">Отправка</button></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-right" style="
+        width: 50%;
+        border-top-right-radius: 40px;
+        border-bottom-right-radius: 40px;
+        overflow: hidden;
+      ">
+        <iframe src="https://yandex.ru/map-widget/v1/?ll=46.092288%2C43.347822&mode=routes&rtext=~43.347822%2C46.092288&rtt=auto&ruri=~&z=17"
+          width="100%" height="100%" frameborder="0" allowfullscreen="true" style="border: none;"></iframe>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay-bs-second">
+    <div class="modal-bs-field-content">
+        <div class="second-header">
+            <div class="map">   
+                <div style="position:relative; overflow:hidden; border-radius: 0px; border: none;" class="map-MOB-ya">
+                    <a href="https://yandex.ru/maps/11026/gudermes/?utm_medium=mapframe&utm_source=maps" style="
+                        color:#eee;
+                        font-size:12px;
+                        position:absolute;
+                        top:0px;">Гудермес</a>
+
+                        <a href="https://yandex.ru/maps/11026/gudermes/?ll=46.092288%2C43.347822&mode=routes&rtext=~43.347822%2C46.092288&rtt=auto&ruri=~&utm_medium=mapframe&utm_source=maps&z=17" 
+                        style="color:#eee;
+                        font-size:12px;
+                        position:absolute;
+                        top:14px;"></a>
+
+                        <iframe src="https://yandex.ru/map-widget/v1/?ll=46.092288%2C43.347822&mode=routes&rtext=~43.347822%2C46.092288&rtt=auto&ruri=~&z=17" 
+                        class="yamap"
+                        frameborder="0" 
+                        allowfullscreen="true" 
+                        style="position:relative;"></iframe>
+                    </div>   
+                </div>
+            </div>    
+
+            <div class="modal-header-second" style="display: flex; align-items: center; text-align: right;">
+                <button class="close-modal-second" onclick="closeMobileFullModal()" style="width: 45px; height: 45px; background: transparent; border: none; cursor: pointer;">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M6 6l12 12M6 18L18 6" />
+                    </svg>
+                </button>
+                <h2 style="margin: 0 auto; font-size: clamp(1.5rem, 2.2vw, 2.2rem); font-weight: bold; text-align: right; font-family: a; color: white;">
+                    Оформление
+                </h2>
+
+                <div class="empty-space" style="width: 30px"></div>
+            </div>
+            
+            <div class="modal-content-order-way">
+
+            <div class="modal-field-content-delievery">
+                <input type="text" placeholder="Город, улица, дом *" class="mob-modal-input location-input input-info" name="place-MOB">
+
+            
+                <input type="text" id="podyezd3" placeholder="Подъезд" class="mob-modal-input poduezd-input input-info">
+
+                <input type="text" id="name-and-surname3" class="mob-modal-input n-s-d input-info" placeholder="Ф.И.О. *">
+                <input type="number" id="clients-phone3" class="mob-modal-input phone-input input-info" placeholder="Номер телефона">
+                <input type="text" id="address-comment3" class="mob-modal-input comment-input input-info" placeholder="Комментарий к адресу">
+
+                <div class="our-address" style="font-family: Arial; text-align: center; margin-top: 10px;">
+                    <strong style="color: white; font-weight: 500; font-size: clamp(14px, 0.9vw, 16px);">Гудермес, ул. Ватутина 51</strong>
+                    <p style="color: rgb(201, 201, 201); font-weight: 500; font-size: clamp(12px, 0.7vw, 14px); margin: 5px 0;">
+                    Пн-Вс: 9:00-23:00
+                    </p>
+                </div>
+
+                <div class="im-ready-btn" style="display: flex; justify-content: center;">
+                    <a href="final-send.html" style="width: 100vw;"><button class="sending">Отправка</button></a>
+                </div>
+            </div>
+
+            <div class="modal-field-content-selftake">
+                <input type="text" id="name-and-surname4" class="input-info big-one name-surname-info" placeholder="Ф.И.О. *">
+                <input type="number" id="clients-phone4" class="input-info big-one phone-num" placeholder="Номер телефона">
+
+                <div class="our-address" style="font-family: Arial; text-align: center; margin-top: 10px;">
+                    <strong style="color: white; font-weight: 500; font-size: clamp(14px, 0.9vw, 16px);">Гудермес, ул. Ватутина 51</strong>
+                    <p style="color: rgb(201, 201, 201); font-weight: 500; font-size: clamp(12px, 0.7vw, 14px); margin: 5px 0;">
+                    Пн-Вс: 9:00-23:00
+                    </p>
+                </div>
+
+                <div class="im-ready-btn" style="display: flex; justify-content: center;">
+                    <a href="final-send"><button class="sending">Отправка</button></a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+    <div class="order-container">
+
+        <div class="header-content">
+            <a href="javascript:history.back()">
+                <div class="back-button" style="text-shadow: none;">⬅</div>
+            </a>
+            <img src="/img/landing_logo_x2.jpeg" alt="logo" class="logo">
+        </div>
+
+        <div class="zakaz">
+            <div class="bluda">
+                <h3>Корзина</h3>
+                <button class="remove-from-cart-all" id="rall">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="remove-urna">
+                        <path d="M3 6h18"></path>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                        <line x1="10" y1="11" x2="10" y2="17"></line>
+                        <line x1="14" y1="11" x2="14" y2="17"></line>
+                    </svg>
+                </button>
+            </div>    
+            <div class="chosen-foods-menu">
+                <div class="nothing">
+                    <img src="/img/Снимок экрана 2025-10-10 142050.jpg" alt="" class="gif-nothing">
+                </div>
+                <div class="chosen-foods">
+                    
+                </div>
+            </div>
+        </div>
+            
+        <div class="line"></div>
+
+        <div class="price-and-etc blackey">
+            <h2>Общая сумма:</h2>
+            <h3 id="total-price">Пустовато</h3>
+            <button class="ordering-mob" onclick="orderModalMob()">Оформление</button>
+            <button class="ordering-bs" onclick="orderModalBs()">Оформление</button>
+        </div>
+
+    </div>
+
+    
+
+    <script>
+function updateTotal() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const total = cart.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
+    document.getElementById('total-price').textContent = total > 0 ? `${total} ₽` : 'Пустовато';
+}
+
+function updateCartItemPrice(cartItem, price, quantity) {
+    const priceElement = cartItem.querySelector('.cart-item-info p');
+    priceElement.textContent = `${price * quantity} ₽`;
+}
+
+function updateQuantityInStorage(id, newQuantity) {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const item = cart.find(i => i.id === id);
+    if (item) {
+        item.quantity = newQuantity;
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+}
+
+function orderModalMob(){
+    document.getElementById('modal-mob').style.display = 'flex';
+    document.body.style.overflow = 'hidden'; 
+    document.body.style.touchAction = 'none';
+}
+
+function closeModalMob() {
+    document.getElementById('modal-mob').style.display = 'none';
+    document.body.style.overflow = '';
+    document.body.style.touchAction = '';
+}
+
+function orderModalBs(){
+    document.getElementById('modal-bs').style.display = 'flex';
+    document.body.style.overflow = 'hidden'; 
+    document.body.style.touchAction = 'none';
+}
+
+function closeModalBs() {
+    document.getElementById('modal-bs').style.display = 'none';
+    document.body.style.overflow = '';
+    document.body.style.touchAction = '';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartContainer = document.querySelector('.chosen-foods');
+    const nothing = document.querySelector('.nothing');
+
+    cartContainer.innerHTML = '';
+
+    if (cart.length === 0) {
+        nothing.style.display = 'flex';
+        updateTotal();
+        return;
+    } else {
+        nothing.style.display = 'none';
+    }
+
+    cart.forEach(item => {
+        if (!item.quantity || isNaN(item.quantity)) item.quantity = 1;
+
+        const cartItem = document.createElement('div');
+        cartItem.classList.add('cart-item');
+        cartItem.dataset.id = item.id;
+
+        cartItem.innerHTML = `
+            <button class="remove-from-cart">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="remove-urna">
+                    <path d="M3 6h18"></path>
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    <line x1="10" y1="11" x2="10" y2="17"></line>
+                    <line x1="14" y1="11" x2="14" y2="17"></line>
+                </svg>
+            </button>
+            <img src="${item.imgSrc}" alt="${item.name}">
+            <div class="cart-item-info">
+                <h3>${item.name}</h3>
+                <p>${item.price * item.quantity} ₽</p>
+            </div>   
+            <div class="add-or-decrease">
+                <button class="add-one">+</button>
+                <div class="quantity">${item.quantity} шт.</div>
+                <button class="decrease-one">-</button>
+            </div>
+        `;
+
+        cartContainer.appendChild(cartItem);
+
+        const addButton = cartItem.querySelector('.add-one');
+        const decreaseButton = cartItem.querySelector('.decrease-one');
+        const quantityElement = cartItem.querySelector('.quantity');
+
+        addButton.addEventListener('click', () => {
+            let quantity = parseInt(quantityElement.textContent);
+            quantity++;
+            quantityElement.textContent = `${quantity} шт.`;
+            updateCartItemPrice(cartItem, item.price, quantity);
+            updateQuantityInStorage(item.id, quantity);
+            updateTotal();
+        });
+
+        decreaseButton.addEventListener('click', () => {
+            let quantity = parseInt(quantityElement.textContent);
+            if (quantity > 1) {
+                quantity--;
+                quantityElement.textContent = `${quantity} шт.`;
+                updateCartItemPrice(cartItem, item.price, quantity);
+                updateQuantityInStorage(item.id, quantity);
+                updateTotal();
+            }
+        });
+
+        cartItem.querySelector('.remove-from-cart').addEventListener('click', () => {
+            let cartData = JSON.parse(localStorage.getItem('cart')) || [];
+            cartData = cartData.filter(i => i.id !== item.id);
+            localStorage.setItem('cart', JSON.stringify(cartData));
+
+            cartItem.remove();
+            if (cartData.length === 0) nothing.style.display = 'flex';
+            updateTotal();
+        });
+    });
+
+    const clearAllBtn = document.querySelector('.remove-from-cart-all');
+    if (clearAllBtn) {
+        clearAllBtn.addEventListener('click', () => {
+            localStorage.removeItem('cart');
+            cartContainer.innerHTML = '';
+            nothing.style.display = 'flex';
+            updateTotal();
+        });
+    }
+
+    updateTotal();
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const deliveryRadio = document.getElementById('delivery');
+  const pickupRadio = document.getElementById('pickup');
+  const deliveryForm = document.querySelector('.modal-order-way-delievery-form');
+  const pickupForm = document.querySelector('.modal-order-way-selftake-form');
+
+  function updateForms() {
+    if (deliveryRadio.checked) {
+      deliveryForm.style.display = 'flex';
+      pickupForm.style.display = 'none';
+    } else {
+      pickupForm.style.display = 'flex';
+      deliveryForm.style.display = 'none';
+    }
+  }
+
+  deliveryRadio.addEventListener('change', updateForms);
+  pickupRadio.addEventListener('change', updateForms);
+  updateForms();
+});
+
+</script>
+
+<script>
+
+function closeMobileFullModal() {
+  const modal = document.querySelector('.modal-overlay-bs-second');
+  modal.style.display = 'none';
+  document.body.style.overflow = '';
+}
+</script>
+
+<script>
+function chooseDeliveryOption() {
+  const selected = document.querySelector('input[name="mob-delivery"]:checked');
+  if (!selected) return;
+
+  const modalMob = document.getElementById('modal-mob');
+  modalMob.style.display = 'none';
+
+  const modalSecond = document.querySelector('.modal-overlay-bs-second');
+  modalSecond.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+
+  let delBlock = modalSecond.querySelector('.modal-field-content-delievery');
+  let selfBlock = modalSecond.querySelector('.modal-field-content-selftake');
+
+  if (selected.value === 'delivery') {
+    delBlock.style.display = 'flex';
+    selfBlock.style.display = 'none';
+  } else if (selected.value === 'pickup') {
+    selfBlock.style.display = 'flex';
+    delBlock.style.display = 'none'
+  }
+}
+</script>
+</body>
+</html>
+

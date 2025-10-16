@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Other stuff</title>
+    <style>
+        :root{
+            --index: calc(1vw + 1vh);
+        }
+
+        @font-face {
+            font-family: 'idk';
+            src: url(/styles/fonts/Athelas-Regular.ttf) format('truetype');
+        }
+        body{
+            background-image: url('/img/wood_shutterstock_440586838.webp');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: rgb(0, 0, 0);
+            text-shadow: 12px 10px 10px #000000;
+        }
+
+        .other-menu{
+            z-index: 10000;
+            overflow: hidden;
+            text-align: center;
+            padding: 10px;
+            color: rgb(248, 248, 248);
+            background-color: rgba(62, 62, 62, 0.227);
+            backdrop-filter: blur(5px);
+            border-radius: 30px;
+            position: fixed;
+            font-family: 'Arial', sans-serif;
+            align-items: space-between;
+        }
+
+        .other-page-menu{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            inset: 0;             
+            z-index: 100;
+            overflow-y: auto;
+            overflow-x: hidden;        /* если высота контента больше окна */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        /* если внутренняя карточка не должна растягиваться по ширине: */
+        .other-page-menu .other-menu{
+            max-width: 98.6%;
+            min-width: 30%;
+            box-shadow: 0 0 50px 20px rgba(0, 0, 0, 0.332);
+        }
+
+        .page-wrap-for-padding{
+            height: 100%;
+            margin: 20px;
+            margin-bottom: 3px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ps-or-smth{
+            font-size: calc(10px + 0.5vw + 0.5vh);
+            margin-top: 50px;
+            margin-bottom: 30px;
+            font-weight: 500;
+            color: rgb(158, 158, 158);
+        }
+
+        .white-page{
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        h1{
+            font-family: idk;
+            font-size: calc(20px + 1.5vw + 1.5vh);
+        }
+
+        button{
+            font-family: 'Arial', sans-serif;
+            font-size: calc(10px + 0.5vw + 0.5vh);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.885);
+            color: #171717;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+    </style>
+</head>
+<body>
+    <div class="other-page-menu">
+        <div class="other-menu">
+            <div class="page-wrap-for-padding">
+                <div class="white-page">
+                    <h1>Навигация</h1>
+                    <a href="/index.html"><button>Главная</button></a>
+                    <a href="about.html"><button>О нас</button></a>
+                    <a href="order.html"><button>Корзина</button></a>
+                    <a href="rates.html"><button>Отзывы</button></a>
+                </div>
+
+                <div class="ps-or-smth">
+                    <p>Номер для доставки и информации: <br class="br-for-mob">+7 (995) 800-08-08</p>
+                    <p>Почта: <br class="br-for-mob">  cafe-lazeez@mail.ru</p>
+                </div>
+            </div>    
+        </div>
+    </div>
+</body>
+</html>

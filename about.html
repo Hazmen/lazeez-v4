@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>about</title>
+    <style>
+        :root{
+            --index: calc(1vw + 1vh);
+            --thispadding: 20px;
+        }
+
+        body{
+            background-image: url('/img/wood_shutterstock_440586838.webp');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            overflow-x: hidden;
+            text-shadow: 12px 10px 10px #000000;
+            /*   */
+        }
+
+        h1{
+            font-size: calc(var(--index)*2.5)
+        }
+
+        .back-button {
+            display: flex;
+            border: 2px solid rgb(255, 255, 255);
+            background-color: transparent;
+            width: calc(var(--index)*4);
+            height: calc(var(--index)*4);
+            border-radius: 50%;
+            color: white;
+            font-size: calc(var(--index)*3.5);
+            text-align: center; 
+            padding: 5px;
+            align-items: center;
+            justify-content: center;
+            line-height: calc(var(--index)*4);
+            box-shadow: 12px 10px 5px rgba(6, 6, 6, 0.766);
+        }
+
+        a{text-decoration: none;}
+
+        .header-content{
+            display: flex;
+            align-items: center;       /* выравнивание по вертикали */
+            justify-content: center;   /* центрирует лого по горизонтали */
+            position: relative;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .header-content .back-button {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%); /* центрируем по вертикали относительно строки */
+        }
+
+        .about-page{
+            gap: calc(var(--index) * 2);
+            text-align: left;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: rgb(255, 255, 255);
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 12px 10px 10px rgb(19, 19, 19);
+            backdrop-filter: blur(10px);
+            font-family: Arial;
+            width: 80%;
+            height: auto;
+            padding-bottom: 3em;
+        }
+
+        .about-text{
+            font-size: calc(var(--index) * 2);
+            letter-spacing: 1.7px;
+            margin-bottom: 5%;
+            line-height: 1.5;
+        }
+
+        .slider-container{
+            margin: 0 calc(0px - var(--about-page-padding, 20px));
+            display: flex;
+            flex-direction: row;
+            min-width: calc(var(--index)*10);
+            height: 50%;
+            overflow: hidden;
+            padding: 0;
+            margin-left: calc(0px - var(--about-page-padding, 20px));
+            &:hover .group{
+                animation-play-state: paused;
+            }
+            
+        }
+
+        .slider-image{
+            width: calc(var(--index) * 25);
+            height: calc(var(--index) * 25);
+            border-radius: 30px;
+            background-color: rgb(255, 255, 255);
+            box-shadow: 12px 10px 10px #1e1e1e;
+            margin-bottom: 5%;
+            margin-top: 5%;
+            box-shadow: 12px 10px 10px #1a1a1a;
+        }
+
+        .group{
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            will-change: transform;
+            animation: slide 30s linear infinite;
+            margin: 0;
+            padding-right: 20px;
+        }
+
+
+        @keyframes slide {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        .logo{
+            width: calc(var(--index) * 10);
+            height: auto;
+            display: block;
+            border-radius: 25px;
+            box-shadow: 12px 10px 10px #171717;
+        }
+
+        .image1{
+            background-image: url('https://avatars.mds.yandex.net/get-altay/14540779/2a000001944d4e92d8ca59621b378242a084/XXXL');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .image2{
+            background-image: url('https://avatars.mds.yandex.net/get-altay/14312158/2a000001944d4c8af81d03c008f4c20dc271/XXXL');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .image3{
+            background-image: url('https://avatars.mds.yandex.net/get-altay/14563476/2a000001944d4f075dfc0293fb2b96284174/XXXL');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .image4{
+            background-image: url('https://avatars.mds.yandex.net/get-altay/14295867/2a000001944d4ad89085bc2210d492043ad0/XXXL');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .image5{
+            background-image: url('/img/nice-image.webp');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .anim-speed{
+            width: calc(var(--index)*20);
+            margin: 0 auto;
+            display: grid;
+            gap: 15px;
+            align-items: center;
+            text-align: center;
+            font-size: calc(var(--index)*1.4);
+            font-weight: 600;
+        }
+
+        .button{
+            border: 2px solid white;
+            color: white;
+            background: none;
+            border-radius: 40px;
+            width: calc(var(--index)*10);
+            height: calc(var(--index)*3);
+            margin: 0 auto;
+            font-size: calc(var(--index)*1.5);
+            cursor: pointer;
+            animation: all .5s ease;
+            box-shadow: 6px 10px 6px rgba(28, 28, 28, 0.766);
+        }
+
+        .button:hover{
+            animation: btns 2s ease forwards;
+        }
+
+        @keyframes btns{
+            0% {
+                background: none;
+                color: rgb(255, 255, 255);
+            }
+
+            50% {
+                background-color: white;
+                color: black;
+            }
+
+            100% {
+                background: none;
+                color: rgb(255, 255, 255);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="about-page">
+        <div class="header-content">
+            <a href="javascript:history.back()">
+                <div class="back-button">⬅</div>
+            </a>
+            <img src="/img/landing_logo_x2.jpeg" alt="logo" class="logo">
+        </div>
+        
+        <h1>О нас</h1>
+
+        <p class="about-text">Lazeez Cafe — семейное кафе, где кавказское гостеприимство обнимает неожиданные вкусы: домашние блюда, пицца и тако — всё свежее, всё с душой, а бургеров нет — нам хватает фантазии.
+        </br></br>Стены? Это отдельная история — черно-белые рисунки, как тихие шедевры: смотришь, любуешься, забываешь про время.
+        </br></br>Мы не просто кормим — мы собираем за столом семьи, друзей, случайных прохожих, превращая их в постоянных гостей.
+        Приходите — у нас вкусно не по шаблону, а по настроению.</p>
+
+        <div class="slider-container">
+            <div class="group">
+                <div class="slider-image image1"></div>
+                <div class="slider-image image2"></div>
+                <div class="slider-image image3"></div>
+                <div class="slider-image image4"></div>
+                <div class="slider-image image5"></div>
+            </div>
+
+            <div class="group">
+                <div class="slider-image image1"></div>
+                <div class="slider-image image2"></div>
+                <div class="slider-image image3"></div>
+                <div class="slider-image image4"></div>
+                <div class="slider-image image5"></div>
+            </div>
+
+        </div>
+
+        <p style="text-align: center;">*Скорость прокрутки*</p>
+        <div class="anim-speed">
+            <button class="button slow">Медленная</button>
+            <button class="button medium">Умеренная</button>
+            <button class="button fast">Быстрая</button>
+        </div>
+    </div>
+
+    <script>
+        const slowBtn = document.querySelector('.slow'); // кнопка "медленно"
+        const mediumBtn = document.querySelector('.medium'); // кнопка "умеренно" 
+        const fastBtn = document.querySelector('.fast'); // кнопка "быстро"
+
+        // Получаем все элементы с классом group
+        const animatedElements = document.querySelectorAll('.group'); // коллекция элементов
+
+        // Массив кнопок для удобства
+        const buttons = [slowBtn, mediumBtn, fastBtn];
+
+        // Функция для установки активной кнопки
+        function setActiveButton(activeBtn) {
+            buttons.forEach(btn => {
+                if (btn === activeBtn) {
+                    btn.style.backgroundColor = 'white';
+                    btn.style.color = 'black';
+                } else {
+                    btn.style.backgroundColor = ''; // сброс цвета
+                    btn.style.color = 'white';
+                }
+            });
+        }
+
+        // Функция для изменения скорости анимации
+        function changeAnimationSpeed(duration) {
+            // Применяем изменение ко всем элементам группы
+            animatedElements.forEach(element => {
+                element.style.animationDuration = duration + 's';
+            });
+        }
+
+        // Обработчики событий для кнопок
+        slowBtn.addEventListener('click', function() {
+            changeAnimationSpeed(100); // медленно
+            setActiveButton(this);
+        });
+
+        mediumBtn.addEventListener('click', function() {
+            changeAnimationSpeed(30); // умеренно (начальная скорость)
+            setActiveButton(this);
+        });
+
+        fastBtn.addEventListener('click', function() {
+            changeAnimationSpeed(10); // быстро
+            setActiveButton(this);
+        });
+
+        // Устанавливаем начальное состояние (умеренно)
+        setActiveButton(mediumBtn);
+    </script>
+</body>
+</html>
